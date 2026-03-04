@@ -58,6 +58,56 @@ public class timeHashing{
             keys[i] = keys[j];
             keys[j] = temp;
         }
+     data = new KeyValue[N];
+        for (int i = 0; i < N; i++) {
+            String keyStr = String.valueOf(keys[i]);
+            String valueStr = String.valueOf(i + 1); 
+            data[i] = new KeyValue(keyStr, valueStr);
+        }
+        
+        System.out.println("Data generation complete. First 950,000 will be used.\n");
+    }
+  static double timeOpenHashing (int m,double alpha ) {
+    int repetitions = 30;
+    double totalTime = 0;
+    for ( int rep =0; rep < repetitions ;rep ++) {
+      openHash hashTable = new openHash(m);
+      long start = System.nanoTime();
+      for (int i =0 ;i < USE_N ; i++) {
+        hashTable .insert( data[i].key, data[i].value);
+      }
+      long end =System.nanoTime();
+       totalTime += (end - start) / 1_000_000.0;
+        }
+        
+        return totalTime / repetitions;
+    }
+  static double timeChainedHashing(int m, double alpha) {
+        int repetitions = 30;
+        double totalTime = 0;
+        
+        for (int rep = 0; rep < repetitions; rep++) {
+            // Create new chained hash table
+            chainedHash hashTable = new chainedHash(m);
+            
+            // Insert first USE_N items
+            long start = System.nanoTime();
+            for (int i = 0; i < USE_N; i++) {
+                hashTable.insert(data[i].key, data[i].value);
+            }
+            long end = System.nanoTime();
+            
+            totalTime += (end - start) / 1_000_000.0;  // Convert to ms
+        }
+    
+  
+    
+      
+    
+    
+        
+  
+    
     
     
         
