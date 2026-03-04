@@ -30,3 +30,37 @@ public class chainedHash{
         
         return (int)(hash % m) + 1;
     }
+ public void insert(String key, String value) {
+        int index = hash(key);
+        if (table[index] == null) {
+            table[index] = new Node(key, value);
+            size++;
+            return;
+        }
+        Node current = table[index];
+        Node prev = null;
+        while (current != null) {
+            if (current.key.equals(key)) {
+                current.value = value;
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+        prev.next = new Node(key, value);
+        size++;
+    }
+    public String lookup(String key) {
+        int index = hash(key);
+        Node current = table[index];
+        while (current != null) {
+            if (current.key.equals(key)) {
+                return current.value;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
+    
+
