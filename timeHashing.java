@@ -87,18 +87,19 @@ public class timeHashing{
         double totalTime = 0;
         
         for (int rep = 0; rep < repetitions; rep++) {
-            // Create new chained hash table
             chainedHash hashTable = new chainedHash(m);
-            
-            // Insert first USE_N items
             long start = System.nanoTime();
             for (int i = 0; i < USE_N; i++) {
                 hashTable.insert(data[i].key, data[i].value);
             }
             long end = System.nanoTime();
             
-            totalTime += (end - start) / 1_000_000.0;  // Convert to ms
+            totalTime += (end - start) / 1_000_000.0; 
         }
+    return totalTime / repetitions;
+  }
+}
+
     
   
     
