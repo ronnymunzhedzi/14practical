@@ -39,6 +39,29 @@ public class timeHashing{
         System.out.print("   " + (int)(alpha*100) + "%    |");
         double openTime = timeOpenHashing (m,alpha);
         System.out.print( "    " + fiveD.format(openTime) + "     |");
+        double chainedTime = timeChainedHashing(m, alpha);
+         System.out.println("        " + fiveD.format(chainedTime));
+        }
+        
+        System.out.println("==========================================================");
+    }
+  static void generateTestData () {
+    System.out.println("Generating " + N + "key value pairs...");
+    Integer[] keys = new Integer [N];
+    for (int i =0; i< N; i++) {
+      keys[i] = i+1;
+    }
+    Random rand = new Random(42); 
+        for (int i = N-1; i > 0; i--) {
+            int j = rand.nextInt(i+1);
+            Integer temp = keys[i];
+            keys[i] = keys[j];
+            keys[j] = temp;
+        }
+    
+    
+        
+        
         
         
         
