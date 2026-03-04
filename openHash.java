@@ -66,7 +66,36 @@ public class openHash {
             }
             attempt++;
         }
-        
-        return null;
+      return null;
+  
     }
+  public boolean delete(String key) {
+        int index = hash(key);
+        int attempt = 0;
+        
+        while (attempt < m) {
+            int probe = nextProbe(index, attempt);
+            
+            if (table[probe] == null) {
+                return false; 
+            }
+            
+            if (table[probe].isActive && table[probe].key.equals(key)) {
+                table[probe].isActive = false; 
+                size--;
+                return true;
+            }
+            
+            attempt++;
+        }
+        
+        return false;
+    }
+    public boolean isInTable(String key) {
+        return lookup(key) != null;
+    }
+    public double getLoadFactor() {
+        return (double)size / m;
+    }
+}
   
